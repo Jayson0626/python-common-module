@@ -124,9 +124,9 @@ def copy_dir(dir1, dir2):
     # 创建目标目录
     if not os.path.exists(dir2):
         os.makedirs(dir2)
-        print "%s文件夹创建成功!" % dir2
+        print("%s文件夹创建成功!" % dir2)
     else:
-        print "目标文件夹已存在，请删除后再复制！"
+        print("目标文件夹已存在，请删除后再复制！")
         sys.exit(1)
 
     # 遍历源目录并复制

@@ -1,6 +1,17 @@
+===========Pycharm in Windows====================
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # @FileName: ${NAME}.py
 # @Time    : ${DATE} ${TIME}
 # @Author  : Jayson
 # @Email   : Jay_Shenhao@163.com
+
+
+===========Pycharm in Linux====================
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @FileName: ${NAME}.py
+# @Date    : ${DATE} ${TIME}
+# @Author  : Jayson
+# @Email   : Jay_Shenhao@163.com
+
