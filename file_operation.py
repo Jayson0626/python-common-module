@@ -27,7 +27,7 @@ def get_all_files_abs_path_except_someone_in_dir(dir_path, exception_file_list):
     :return: tuple of absolute file path
     """
     # Check para type for: exception_file_list
-    if not isinstance(exception_file_list,(list)):
+    if not isinstance(exception_file_list, list):
         raise TypeError("Please input list type parameter!\n")
 
     file_list = []
@@ -50,7 +50,7 @@ def get_specify_file_abs_path_in_dir(dir_path, specify_file_list):
     :return: tuple of absolute file path
     """
     # Check para type for: exception_file_list
-    if not isinstance(specify_file_list,(list)):
+    if not isinstance(specify_file_list, list):
         raise TypeError("Please input list type parameter!\n")
 
     file_list = []
@@ -139,3 +139,22 @@ def copy_dir(dir1, dir2):
             mycopy(file1, file2)  # 是文件，直接调用文件复制函数
         elif os.path.isdir(file1):
             copy_dir(file1, file2)  # 是目录，递归调用copy_dir()函数即可
+
+
+def return_and_get_upper_level_dir(level_num):
+    """
+    Return upper num-level dir,supporting two level
+    :param level_num: num of level
+    :return: related dir path
+    """
+    if level_num > 2:
+        raise ValueError("Supporting two level now,Please input 1 or 2")
+
+    if level_num == 1:
+        # return upper level dir and get that dir name
+        os.chdir(os.path.abspath(os.path.join(os.getcwd(), "..")))
+        return os.getcwd()
+    elif level_num ==2:
+        # return upper upper level dir, change '\\' into '/' if in Linux env
+        os.chdir(os.path.abspath(os.path.join(os.getcwd(), "..\\..")))
+        return os.getcwd()
