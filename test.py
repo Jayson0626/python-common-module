@@ -1,5 +1,9 @@
-#!/usr/bin/python
-# coding=utf-8
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @FileName: test.py
+# @Time    : 2019/12/29 18:11
+# @Author  : Jayson
+# @Email   : Jay_Shenhao@163.com
 
 # 解压缩测试
 # import zip_file
@@ -12,7 +16,7 @@ from file_operation import get_file_abs_path_tuple_in_dir, get_all_files_abs_pat
 import os
 
 cur_path = os.getcwd()
-f1_exception = get_all_files_abs_path_except_someone_in_dir(cur_path,'test.py')
+f1_exception = get_all_files_abs_path_except_someone_in_dir(cur_path,['test.py','vcs.xml'])
 # f1_all = get_file_abs_path_tuple_in_dir(cur_path)
 # print("len:", len(f1_all),len(f1_exception))
 

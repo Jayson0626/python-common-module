@@ -1,6 +1,9 @@
-#!/usr/bin/python
-# coding=utf-8
-
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @FileName: stack.py
+# @Time    : 2019/12/29 18:11
+# @Author  : Jayson
+# @Email   : Jay_Shenhao@163.com
 
 class Stack(object):
     """

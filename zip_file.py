@@ -1,7 +1,12 @@
-#!/usr/bin/python
-# coding=utf-8
-import os, zipfile, tarfile
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @FileName: file_operation.py
+# @Time    : 2019/12/29 18:11
+# @Author  : Jayson
+# @Email   : Jay_Shenhao@163.com
 
+
+import os, zipfile, tarfile
 
 class ZipFile(object):
 	'Compress files or dirs'
