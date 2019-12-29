@@ -3,7 +3,7 @@
 import os, zipfile, tarfile
 
 
-class ZipFile:
+class ZipFile(object):
 	'Compress files or dirs'
 
 	def __init__(self):
