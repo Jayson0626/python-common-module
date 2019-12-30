@@ -15,17 +15,21 @@
 import os
 
 from file_operation import get_all_files_abs_path_except_someone_in_dir, \
-	get_specify_file_abs_path_in_dir, return_and_get_upper_level_dir
+	get_specify_file_abs_path_in_dir, return_and_get_upper_level_dir, get_all_dir_names_in_specify_path, get_all_dir_abs_path_in_specify_path
 
 cur_path = os.getcwd()
-f1_exception = get_all_files_abs_path_except_someone_in_dir(cur_path, ['test.py', 'vcs.xml'])
+# f1_exception = get_all_files_abs_path_except_someone_in_dir(cur_path, ['test.py', 'vcs.xml'])
 # f1_all = get_file_abs_path_tuple_in_dir(cur_path)
 # print("len:", len(f1_all),len(f1_exception))
 
-sf = get_specify_file_abs_path_in_dir(cur_path, ['test.py', 'vcs.xml'])
-print("specify file:", sf)
-print("except file:", f1_exception)
-print("len:", len(f1_exception))
-print(os.getcwd())
-upper = return_and_get_upper_level_dir(1)
-print(os.getcwd())
+# sf = get_specify_file_abs_path_in_dir(cur_path, ['test.py', 'vcs.xml'])
+# print("specify file:", sf)
+# print("except file:", f1_exception)
+# print("len:", len(f1_exception))
+# print(os.getcwd())
+# upper = return_and_get_upper_level_dir(1)
+# print(os.getcwd())
+dir = get_all_dir_names_in_specify_path(r'F:\XEL\Git_Hub\qos-module')
+dir1 = get_all_dir_abs_path_in_specify_path(r'F:\XEL\Git_Hub\qos-module')
+print("dir names:",dir)
+print("dir path names:",dir1)

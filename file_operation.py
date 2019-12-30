@@ -154,7 +154,35 @@ def return_and_get_upper_level_dir(level_num):
         # return upper level dir and get that dir name
         os.chdir(os.path.abspath(os.path.join(os.getcwd(), "..")))
         return os.getcwd()
-    elif level_num ==2:
+    elif level_num == 2:
         # return upper upper level dir, change '\\' into '/' if in Linux env
         os.chdir(os.path.abspath(os.path.join(os.getcwd(), "..\\..")))
         return os.getcwd()
+
+
+def get_all_dir_names_in_specify_path(dir_path):
+    """
+    Get all dir names instead of file names in specified path, and not subdir's.
+    :param dir_path: Specify dir path
+    :return: dir name tuple
+    """
+    tmp_list = []
+    for file in os.listdir(dir_path):
+        file_path = os.path.join(dir_path, file)
+        if os.path.isdir(file_path):
+            tmp_list.append(file)
+    return tuple(tmp_list)
+
+
+def get_all_dir_abs_path_in_specify_path(dir_path):
+    """
+    Get all dir path names in specify path, not including subdir path names
+    :param dir_path: Specify dir path
+    :return: dir path name tuple
+    """
+    tmp_list = []
+    for file in os.listdir(dir_path):
+        file_path = os.path.join(dir_path, file)
+        if os.path.isdir(file_path):
+            tmp_list.append(file_path)
+    return tuple(tmp_list)
