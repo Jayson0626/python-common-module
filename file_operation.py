@@ -44,7 +44,7 @@ def get_all_files_abs_path_except_someone_in_dir(dir_path, exception_file_list):
 
 def get_specify_file_abs_path_in_dir(dir_path, specify_file_list):
     """
-    Get absolute file path(including subdir's) by tuple in directory, excepting specified file name.
+    Get absolute file path(including subdir's) by tuple in directory, via specified file name list.
     :param dir_path: specify dir path
     :param specify_file_list: files need to add file list
     :return: tuple of absolute file path
