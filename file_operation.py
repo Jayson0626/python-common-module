@@ -80,6 +80,20 @@ def get_file_abs_path_tuple_in_dir(dir_path):
     return file_tuple
 
 
+def get_file_abs_path_list_in_dir(dir_path):
+    """
+    Get absolute file path by list in directory, including file of subdir
+    :param dir_path: specify dir path
+    :return: list of absolute file path
+    """
+    file_list = []
+    for root, dirs, files in os.walk(dir_path):
+        for filename in files:
+            # File list including absolute path
+            file_list.append(os.path.join(root, filename))
+    return file_list
+
+
 def get_file_name_tuple_in_dir(dir_path):
     """
     Only get file name by tuple in dir，including file of subdir.
