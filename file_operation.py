@@ -7,8 +7,8 @@
 
 import os
 import sys
-# import shutil
-
+import shutil
+import hashlib
 
 class FileOperation(object):
     """
@@ -200,3 +200,38 @@ def get_all_dir_abs_path_in_specify_path(dir_path):
         if os.path.isdir(file_path):
             tmp_list.append(file_path)
     return tuple(tmp_list)
+
+# Judging two files whether equal or not via hash(md5).
+def get_file_md5(file_path):
+    """
+    Get file's md5 hash value.
+    :param file_path: Input file path
+    :return: File's md5 hash value
+    """
+    line = file_path.readline()
+    hash = hashlib.md5()
+    while (line):
+        hash.update(line)
+        line = file_path.readline()
+    return hash.hexdigest()
+
+
+def is_file_equal(file1, file2):
+    """
+    Judging two files whether equal or not via hash(md5).
+    :param file1: file1 path
+    :param file2: file2 path
+    :return: True or False
+    """
+    with open(file1,"rb") as f1, open(file2,"rb") as f2:
+        str1 = get_file_md5(f1)
+        str2 = get_file_md5(f2)
+        # print("file1's md5 is:%s" % str1)
+        # print("file2's md5 is:%s" % str2)
+
+    # if str1 == str2:
+    #     print("Two files are equal!")
+    # else:
+    #     print("Two files are not equal!")
+
+    return str1 == str2
