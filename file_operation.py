@@ -178,7 +178,7 @@ def copy_replace_dir(src_dir, dst_dir):
         if os.path.isfile(src_file):
             copy_single_file(src_file, dst_file)  # 是文件，直接调用文件复制函数
         elif os.path.isdir(src_file):
-            copy_dir(src_file, dst_file)  # 是目录，递归调用copy_dir()函数即可
+            copy_replace_dir(src_file, dst_file)  # 是目录，copy_replace_dir()函数即可
 
 
 def return_and_get_upper_level_dir(level_num):
