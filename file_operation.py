@@ -110,7 +110,7 @@ def get_file_name_tuple_in_dir(dir_path):
 
 
 # 定义复制单个文件的函数
-def mycopy(file1, file2):
+def copy_single_file(file1, file2):
     """
     这个函数实现单个文件的复制
     将file1文件复制到file2文件中
@@ -128,31 +128,57 @@ def mycopy(file1, file2):
     f2.close()
 
 
-# 定义复制目录的函数
-def copy_dir(dir1, dir2):
+def copy_dir(src_dir, dst_dir):
     """
-    这个函数实现将dir1中的所有文件（包括目录）复制到dir2中
+    这个函数实现将src_dir中的所有文件（包括目录）复制到dst_dir中,如果目标文件夹存在则终止复制操作并终止运行
     """
     # 获取源目录中的文件列表
-    a = os.listdir(dir1)
+    src_file_list = os.listdir(src_dir)
     # 创建目标目录
-    if not os.path.exists(dir2):
-        os.makedirs(dir2)
-        print("%s文件夹创建成功!" % dir2)
+    if not os.path.exists(dst_dir):
+        os.makedirs(dst_dir)
+        print("%s文件夹创建成功!" % dst_dir)
     else:
-        print("目标文件夹已存在，请删除后再复制！")
+        print("目标文件夹:%s 已存在，请删除后再复制！" % dst_dir)
         sys.exit(1)
 
     # 遍历源目录并复制
-    for i in a:
+    for file_list  in src_file_list:
         # 获取源文件和目标文件目录路径
-        file1 = os.path.join(dir1, i)  # 源文件
-        file2 = os.path.join(dir2, i)  # 目标文件
+        src_file = os.path.join(src_dir, file_list)  # 源文件
+        dst_file = os.path.join(dst_dir, file_list)  # 目标文件
         # 判断是文件还是目录，分别进行相应的操作
-        if os.path.isfile(file1):
-            mycopy(file1, file2)  # 是文件，直接调用文件复制函数
-        elif os.path.isdir(file1):
-            copy_dir(file1, file2)  # 是目录，递归调用copy_dir()函数即可
+        if os.path.isfile(src_file):
+            copy_single_file(src_file, dst_file)  # 是文件，直接调用文件复制函数
+        elif os.path.isdir(src_file):
+            copy_dir(src_file, dst_file)  # 是目录，递归调用copy_dir()函数即可
+
+
+def copy_replace_dir(src_dir, dst_dir):
+    """
+    这个函数实现将src_dir中的所有文件（包括目录）复制到dst_dir中，如果目标文件夹存在，将替换它！
+    """
+    # 获取源目录中的文件列表
+    src_file_list = os.listdir(src_dir)
+    # 创建目标目录
+    if not os.path.exists(dst_dir):
+        os.makedirs(dst_dir)
+        print("%s文件夹创建成功!" % dst_dir)
+    else:
+        print("目标文件夹:%s 已存在，准备替换！" % dst_dir)
+        shutil.rmtree(dst_dir)
+        os.makedirs(dst_dir)
+
+    # 遍历源目录并复制
+    for file_list  in src_file_list:
+        # 获取源文件和目标文件目录路径
+        src_file = os.path.join(src_dir, file_list)  # 源文件
+        dst_file = os.path.join(dst_dir, file_list)  # 目标文件
+        # 判断是文件还是目录，分别进行相应的操作
+        if os.path.isfile(src_file):
+            copy_single_file(src_file, dst_file)  # 是文件，直接调用文件复制函数
+        elif os.path.isdir(src_file):
+            copy_dir(src_file, dst_file)  # 是目录，递归调用copy_dir()函数即可
 
 
 def return_and_get_upper_level_dir(level_num):
