@@ -3,7 +3,7 @@
 # @FileName: operate_shell.py
 # @Time    : 2020/2/8 15:58
 # @Author  : Jayson
-# @Email   : Jay_Shenhao@163.com
+# @Email   : Jayson2050@163.com
 
 
 import os
