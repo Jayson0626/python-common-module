@@ -88,15 +88,16 @@ from email.utils import formataddr
 #     print("Error: 无法发送邮件")
 
 
-# 第三方 SMTP 服务
+## 第三方 SMTP 服务
+# mail_host = "smtp.163.com"  # 设置服务器
+# mail_user = "jayson2050@163.com"  # 用户名
+# mail_pwd = "XBIYLCQXBDWYULCZ"  # 口令
+# sender = 'jayson2050@163.com'
+# receivers = ['jayson2050@163.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
-mail_host = "smtp.163.com"  # 设置服务器
-# mail_host_xel = "192.168.8.253"
-mail_user = "jayson2050@163.com"  # 用户名
-mail_pwd = "XBIYLCQXBDWYULCZ"  # 口令
 
-sender = 'jayson2050@163.com'
-receivers = ['jayson2050@163.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+##XEL-server
+
 
 ##html content
 
@@ -202,29 +203,53 @@ receivers = ['jayson2050@163.com']  # 接收邮件，可设置为你的QQ邮箱�
 # except smtplib.SMTPException:
 #     print("Error: 发送失败！")
 
-def mail():
-    ret = True
-    try:
-        msg = MIMEText('地址格式化测试...', 'plain', 'utf-8')
-        #注意：formataddr第二个参数为字符串，而不是列表
-        msg['From'] = formataddr(["沈浩杰", sender])  # 括号里的对应发件人邮箱昵称、发件人邮箱账号
-        msg['To'] = formataddr(["接收者", mail_user])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
-        msg['CC'] = formataddr(["抄送", mail_user])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
-        msg['Subject'] = "地址格式化测试"  # 邮件的主题，也可以说是标题
+class Email():
+    """
+    Send email for test
+    """
 
-        # server = smtplib.SMTP_SSL(mail_host,465)  # 发件人邮箱中的SMTP服务器，端口是25
-        server = smtplib.SMTP()  # 发件人邮箱中的SMTP服务器，端口是25
-        server.connect(mail_host)
-        server.login(mail_user, mail_pwd)  # 括号中对应的是发件人邮箱账号、邮箱密码
-        server.sendmail(sender, receivers, msg.as_string())  # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
-        # server.quit()  # 关闭连接
-    except Exception:  # 如果 try 中的语句没有执行，则会执行下面的 ret=False
-        ret = False
-    return ret
+    def __init__(self,mail_addr,format="html"):
+        self.mail_addr    = mail_addr
+        self.format       = format
+
+    def send_mail(self, subject = '',content = '',attachment='', mail_cc=''):
+        """
+
+        :param mail_addr:
+        :param mail_cc:
+        :param subject:
+        :param content:
+        :param attachment:
+        :return:
+        """
+
+        mail_host = '192.168.8.253'
+        try:
+            msg = MIMEText(content, self.format, 'utf-8')
+            #注意：formataddr第二个参数为字符串，而不是列表
+            msg['From'] = formataddr(["沈浩杰", self.mail_addr])  # 括号里的对应发件人邮箱昵称、发件人邮箱账号
+            msg['To'] = formataddr(["接收者", self.mail_addr])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
+            if mail_cc != '':
+                msg['CC'] = formataddr(["抄送", mail_cc])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
+            msg['Subject'] = subject  # 邮件的主题，也可以说是标题
+
+            # server = smtplib.SMTP_SSL(mail_host,465)  # 发件人邮箱中的SMTP服务器，端口是25
+            server = smtplib.SMTP(mail_host)  # 发件人邮箱中的SMTP服务器，端口是25
+            # server.connect(mail_host)
+            # server.login(mail_user, mail_pwd)  # 括号中对应的是发件人邮箱账号、邮箱密码
+            server.sendmail(self.mail_addr, self.mail_addr, msg.as_string())  # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
+            server.quit()  # 关闭连接
+            print("邮件发送成功")
+        except smtplib.SMTPException:  # 如果 try 中的语句没有执行，则会执行下面的 ret=False
+            print("邮件发送失败")
 
 
-ret = mail()
-if ret:
-    print("邮件发送成功")
-else:
-    print("邮件发送失败")
+
+if __name__ == '__main__':
+    to = 'shen.haojie@xel-tech.com'
+    mail_msg = """
+    <p>Python 邮件发送测试...</p>
+    <p><a href="http://www.runoob.com">这是一个链接</a></p>
+    """
+    mail = Email(to)
+    mail.send_mail(subject="测试",content=mail_msg)
